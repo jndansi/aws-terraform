@@ -1,7 +1,7 @@
 resource "aws_instance" "web" {
   ami                         = "ami-0574da719dca65348"
-  instance_type               = "t2.micro"
-  key_name                    = "my-key-pair"
+  instance_type               = var.type
+  key_name                    = var.key-pair
   vpc_security_group_ids      = [aws_security_group.vpc_sg.id]
   subnet_id                   = aws_subnet.main.id
   associate_public_ip_address = true
@@ -15,8 +15,8 @@ resource "aws_instance" "web" {
 
 resource "aws_instance" "db" {
   ami                         = "ami-0574da719dca65348"
-  instance_type               = "t2.micro"
-  key_name                    = "my-key-pair"
+  instance_type               = var.type
+  key_name                    = var.key-pair
   vpc_security_group_ids      = [aws_security_group.vpc_sg2.id]
   subnet_id                   = aws_subnet.main2.id
   associate_public_ip_address = false
@@ -30,8 +30,8 @@ resource "aws_instance" "db" {
 
 resource "aws_instance" "db2" {
   ami                         = "ami-0574da719dca65348"
-  instance_type               = "t2.micro"
-  key_name                    = "my-key-pair"
+  instance_type               = var.type
+  key_name                    = var.key-pair
   vpc_security_group_ids      = [aws_security_group.vpc_sg2.id]
   subnet_id                   = aws_subnet.main2.id
   associate_public_ip_address = false
