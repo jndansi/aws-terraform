@@ -1,20 +1,20 @@
 variable "name" {
     default = "project-server1"
-    type = string
+    type = "string"
     description = "The name of the aws compute instance"
 }
 
 
 variable "type" {
     default = "t2.micro"
-    type = string
+    type = "string"
     description = "The instance type"
   
 }
 
 variable "key-pair" {
     default = "my-key-pair"
-    type = string
+    type = "string"
     description = "key pair name"
   
 }
