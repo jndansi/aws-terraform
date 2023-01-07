@@ -1,10 +1,11 @@
+
 pipeline {
 
     agent none
 
     stages {
         stage('Git'){
-            agent{ docker {image 'bitnami/git:latest'} }
+            agent any
             stages{
                 stage('Git checkout'){  
                     steps{
@@ -16,23 +17,33 @@ pipeline {
         
         
         stage('Terraform'){
-            agent{ docker {image 'terraformdocker/terraform:latest'} }
+            agent any
             stages{
                 stage('Terraform Init'){
+                    
                     steps{
                         sh 'terraform init'
                     }
                 }
                 stage('Terraform Plan'){
+                    
                     steps{
-                        sh 'terraform plan'
+                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh 'terraform plan'
+                        }
+                        
                     }
                 }
                 stage('Terraform Action'){
+                    
                     steps{
-                        echo 'terraform ${Action}'
-                        sh 'terraform ${Action} --auto-approve'
+                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            echo 'terraform ${Action}'
+                            sh 'terraform ${Action} --auto-approve'
+                        }
+                            
                     }
+                    
                 }
                 
             }
