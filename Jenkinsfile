@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# aws-terraform ...
-=======
-
 pipeline {
 
     agent none
@@ -55,4 +51,3 @@ pipeline {
     }
  
 }
->>>>>>> 5c1a881899c160a240e4ea9a26e95ae209109a55

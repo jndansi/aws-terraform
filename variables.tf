@@ -18,4 +18,3 @@ variable "key-pair" {
     description = "key pair name"
   
 }
-
