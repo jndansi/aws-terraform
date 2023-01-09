@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 # aws-terraform ...
-=======
+
 
 pipeline {
 
