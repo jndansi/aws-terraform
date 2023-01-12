@@ -33,12 +33,12 @@ pipeline {
                         
                     }
                 }
-                stage('Terraform Action'){
+                stage('Terraform Apply'){
                     
                     steps{
                         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                            echo 'terraform ${Action}'
-                            sh 'terraform ${Action} --auto-approve'
+                            echo 'terraform apply'
+                            sh 'terraform apply --auto-approve'
                         }
                             
                     }
