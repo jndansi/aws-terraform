@@ -1,6 +1,11 @@
 pipeline {
 
+    triggers {
+  githubPullRequests events: [labelsAdded(labels('pr'))], spec: '', triggerMode: 'CRON'
+}
+
     agent none
+    
 
     stages {
         stage('Git'){
