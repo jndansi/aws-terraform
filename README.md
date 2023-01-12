@@ -2,7 +2,7 @@
 # aws-terraform ...
 
 
-pipeliness {
+pipelines {
 
     agent none
 
