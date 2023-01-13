@@ -1,8 +1,10 @@
 pipeline {
 
- 
-
     agent none
+ 
+    triggers {
+  githubPullRequests events: [], spec: '', triggerMode: 'HEAVY_HOOKS'
+}
     
 
     stages {
