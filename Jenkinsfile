@@ -36,12 +36,12 @@ pipeline {
                         
                     }
                 }
-                stage('Terraform Apply'){
+                stage('Terraform Destroy'){
                     
                     steps{
                         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                            echo 'terraform apply'
-                            sh 'terraform apply --auto-approve'
+                            echo 'terraform destroy'
+                            sh 'terraform destroy --auto-approve'
                         }
                             
                     }
