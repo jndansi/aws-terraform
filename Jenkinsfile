@@ -2,10 +2,9 @@ pipeline {
 
     agent none
  
-    triggers {
-  githubPullRequests events: [], spec: '', triggerMode: 'HEAVY_HOOKS'
-}
-    
+    triggers { 
+        webhook(pattern: "github", hookUrl: "http://3.233.226.184:8080/job/aws-infrastructure/github-webhook/")
+    }
 
     stages {
         stage('Git'){
