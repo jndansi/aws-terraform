@@ -2,9 +2,9 @@ pipeline {
 
     agent none
  
-    triggers { 
-        webhook(pattern: "github", hookUrl: "http://54.163.78.47/:8080/github-webhook/")
-    }
+//    triggers { 
+//        webhook(pattern: "github", hookUrl: "http://54.163.78.47/:8080/github-webhook/")
+//    }
 
     stages {
         stage('Git'){
