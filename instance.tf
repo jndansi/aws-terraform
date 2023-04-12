@@ -13,7 +13,7 @@ resource "aws_instance" "web" {
   }
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "web1" {
   ami                         = "ami-0574da719dca65348"
   instance_type               = var.type
   key_name                    = var.key-pair
