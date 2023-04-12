@@ -3,7 +3,7 @@ output "ec2-public-ip" {
     
 }
 
-output "ec2-public-ip" {
+output "ec2-public-ip1" {
     value = aws_instance.web1.public_ip
     
 }
