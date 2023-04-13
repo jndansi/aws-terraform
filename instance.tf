@@ -9,7 +9,8 @@ resource "aws_instance" "web" {
 
 
   tags = {
-    Name = var.name
+    Name        = var.name
+    Environment = "production"
   }
 }
 
@@ -24,7 +25,8 @@ resource "aws_instance" "web1" {
 
 
   tags = {
-    Name = "project-server2"
+    Name        = "project-server2"
+    Environment = "production"
   }
 }
 
