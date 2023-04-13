@@ -2,9 +2,9 @@ pipeline {
 
     agent none
  
-    triggers { 
-        webhook(pattern: "github", hookUrl: "http://54.163.78.47/:8080/github-webhook/")
-    }
+//    triggers { 
+//        webhook(pattern: "github", hookUrl: "http://54.163.78.47/:8080/github-webhook/")
+//    }
 
     stages {
         stage('Git'){
@@ -28,15 +28,15 @@ pipeline {
                         sh 'terraform init'
                     }
                 }
-                stage('Terraform Plan'){
-                    
-                    steps{
-                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                            sh 'terraform plan'
-                        }
-                        
-                    }
-                }
+//                stage('Terraform Plan'){
+//                    
+//                    steps{
+//                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+//                            sh 'terraform plan'
+//                        }
+//                        
+//                    }
+//                }
                 stage('Terraform Destroy'){
                     
                     steps{
