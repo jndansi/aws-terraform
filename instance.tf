@@ -12,6 +12,9 @@ resource "aws_instance" "web" {
     Name        = var.name
     Environment = "production"
   }
+
+  user_data = file("script.sh")
+
 }
 
 resource "aws_instance" "web1" {
@@ -28,6 +31,9 @@ resource "aws_instance" "web1" {
     Name        = "project-server2"
     Environment = "production"
   }
+
+  user_data = file("script.sh")
+
 }
 
 resource "aws_instance" "db" {
