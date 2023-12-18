@@ -28,21 +28,21 @@ pipeline {
                         sh 'terraform init'
                     }
                 }
-//                stage('Terraform Plan'){
-//                    
-//                    steps{
-//                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-//                            sh 'terraform plan'
-//                        }
-//                        
-//                    }
-//                }
-                stage('Terraform Destroy'){
+               stage('Terraform Plan'){
+                   
+                   steps{
+                       withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                           sh 'terraform plan'
+                       }
+                       
+                   }
+               }
+                stage('Terraform Apply'){
                     
                     steps{
                         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                            echo 'terraform destroy'
-                            sh 'terraform destroy --auto-approve'
+                            echo 'terraform apply'
+                            sh 'terraform apply --auto-approve'
                         }
                             
                     }
