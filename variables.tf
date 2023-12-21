@@ -13,7 +13,7 @@ variable "type" {
 }
 
 variable "key-pair" {
-    default = "my-key-pair"
+    default = "the-key-pair"
     type = string
     description = "key pair name"
   
