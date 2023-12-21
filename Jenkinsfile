@@ -33,7 +33,6 @@ pipeline {
                    steps{
                        
                        withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                           echo $AWS_SECRET_ACCESS_KEY
                            sh 'terraform plan'
                        }
                        
