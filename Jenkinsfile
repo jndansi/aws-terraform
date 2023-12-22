@@ -31,20 +31,28 @@ pipeline {
                stage('Terraform Plan'){
                    
                    steps{
-                       
-                       withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                           sh 'terraform plan'
-                       }
+                       withCredentials([[
+                            $class: 'AmazonWebServicesCredentialsBinding',
+                            credentialsID: 'aws-credentials',
+                            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
+                        
+                            echo 'terraform plan'
+                            sh 'terraform plan'
                        
                    }
                }
                 stage('Terraform Apply'){
                     
                     steps{
-                        withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                       withCredentials([[
+                            $class: 'AmazonWebServicesCredentialsBinding',
+                            credentialsID: 'aws-credentials',
+                            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
+
                             echo 'terraform apply'
-                            sh 'terraform apply --auto-approve'
-                        }
+                            sh 'terraform apply --auto-approve'                        
                             
                     }
                     
