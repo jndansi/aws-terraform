@@ -37,6 +37,7 @@ pipeline {
                             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
+                                sh 'export TF_LOG=trace'
                                 echo 'terraform plan'
                                 sh 'terraform plan'
                             }
