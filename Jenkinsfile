@@ -35,12 +35,14 @@ pipeline {
                             $class: 'AmazonWebServicesCredentialsBinding',
                             credentialsID: 'aws-credentials',
                             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
+                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+
+                                echo 'terraform plan'
+                                sh 'terraform plan'
+                            }
                         
-                            echo 'terraform plan'
-                            sh 'terraform plan'
-                       
-                   }
+                            
+                    }
                }
                 stage('Terraform Apply'){
                     
@@ -49,11 +51,13 @@ pipeline {
                             $class: 'AmazonWebServicesCredentialsBinding',
                             credentialsID: 'aws-credentials',
                             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
+                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                
+                                echo 'terraform apply'
+                                sh 'terraform apply --auto-approve' 
+                            }
 
-                            echo 'terraform apply'
-                            sh 'terraform apply --auto-approve'                        
-                            
+                       
                     }
                     
                 }
