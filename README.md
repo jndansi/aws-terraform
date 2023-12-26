@@ -49,6 +49,24 @@ The Jenkins pipeline defined in `Jenkinsfile` automates the following stages:
    - Executes `terraform plan` to preview changes.
    - Executes `terraform apply` to apply changes.
 
+## Startup Script
+
+Some useful web server components are configured using the `startup-script.sh` file. The script includes the following:
+
+```bash
+#!/bin/bash
+sudo apt-get update
+sudo apt-get install -y python3
+
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update
+sudo apt install -y ansible
+
+sudo apt install -y apache2
+
+sudo apt install -y php libapache2-mod-php php-mysql
+```
+
 ## License
 
 This project is licensed under the [MIT License](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt).

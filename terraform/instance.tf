@@ -13,7 +13,7 @@ resource "aws_instance" "web" {
     Environment = "dev"
   }
 
-  user_data = file("script.sh")
+  user_data = file("startup-script.sh")
 
 }
 
@@ -32,7 +32,7 @@ resource "aws_instance" "web1" {
     Environment = "dev"
   }
 
-  user_data = file("script.sh")
+  user_data = file("startup-script.sh")
 
 }
 
