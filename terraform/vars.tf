@@ -18,3 +18,10 @@ variable "key-pair" {
     description = "key pair name"
   
 }
+
+variable "ami" {
+    default = "ami-0574da719dca65348"
+    type = string
+    description = "Machine image to be used"
+  
+}
