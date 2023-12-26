@@ -1,57 +1,77 @@
 pipeline {
-
     agent none
- 
-//    triggers { 
-//        webhook(pattern: "github", hookUrl: "http://54.163.78.47/:8080/github-webhook/")
-//    }
 
     stages {
-        stage('Git'){
-            agent any
-            stages{
-                stage('Git checkout'){  
-                    steps{
+        stage('Git') {
+            steps {
+                script {
+                    // Change to the /terraform directory
+                    dir('/terraform') {
                         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jndansi/aws-terraform.git']]])
                     }
                 }
             }
         }
-        
-        
-        stage('Terraform'){
-            agent any
-            stages{
-                stage('Terraform Init'){
-                    
-                    steps{
-                        sh 'terraform init'
+
+        stage('Change to Terraform Directory') {
+            steps {
+                script {
+                    // Change to the /terraform directory
+                    dir('/terraform') {
+                        echo 'Changed to /terraform directory'
                     }
                 }
-                // stage('Terraform Plan'){
-                    
-                //     steps{
-                //         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                //             sh 'terraform plan'
-                //         }
-                        
-                //     }
-                // }
-                stage('Terraform Destroy'){
-                   
-                    steps{
-                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jndansi-aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                            echo 'terraform destroy'
-                            sh 'terraform destroy --auto-approve'
-                        }
-                            
-                    }
-                    
-                }
-                
             }
-        } 
-            
+        }
+
+        stage('Terraform') {
+            stages {
+                stage('Terraform Init') {
+                    steps {
+                        script {
+                            // Change to the /terraform directory
+                            dir('/terraform') {
+                                sh 'terraform init -upgrade'
+                            }
+                        }
+                    }
+                }
+                stage('Terraform Plan') {
+                    steps {
+                        script {
+                            // Change to the /terraform directory
+                            dir('/terraform') {
+                                withCredentials([[
+                                    $class: 'AmazonWebServicesCredentialsBinding',
+                                    credentialsId: 'aws-credentials',
+                                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                        sh 'export TF_LOG=debug'
+                                        echo 'terraform plan'
+                                        sh 'terraform plan'
+                                }
+                            }
+                        }
+                    }
+                }
+                stage('Terraform Apply') {
+                    steps {
+                        script {
+                            // Change to the /terraform directory
+                            dir('/terraform') {
+                                withCredentials([[
+                                    $class: 'AmazonWebServicesCredentialsBinding',
+                                    credentialsId: 'aws-credentials',
+                                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                        echo 'terraform apply'
+                                        sh 'terraform apply --auto-approve'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
- 
 }
