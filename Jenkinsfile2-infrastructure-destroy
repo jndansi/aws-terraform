@@ -1,12 +1,11 @@
 pipeline {
-    agent none
-
+    agent any
     stages {
         stage('Git') {
-            steps {
-                script {
-                    // Change to the /terraform directory
-                    dir('/terraform') {
+            agent any
+            stages {
+                stage('Git checkout') {
+                    steps {
                         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jndansi/aws-terraform.git']]])
                     }
                 }
@@ -17,8 +16,8 @@ pipeline {
             steps {
                 script {
                     // Change to the /terraform directory
-                    dir('/terraform') {
-                        echo 'Changed to /terraform directory'
+                    dir('terraform') {
+                        echo 'Changed to terraform directory'
                     }
                 }
             }
@@ -30,42 +29,24 @@ pipeline {
                     steps {
                         script {
                             // Change to the /terraform directory
-                            dir('/terraform') {
+                            dir('terraform') {
                                 sh 'terraform init -upgrade'
                             }
                         }
                     }
                 }
-                stage('Terraform Plan') {
+                stage('Terraform Destroy') {
                     steps {
                         script {
                             // Change to the /terraform directory
-                            dir('/terraform') {
+                            dir('terraform') {
                                 withCredentials([[
                                     $class: 'AmazonWebServicesCredentialsBinding',
                                     credentialsId: 'aws-credentials',
                                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                                        sh 'export TF_LOG=debug'
-                                        echo 'terraform plan'
-                                        sh 'terraform plan'
-                                }
-                            }
-                        }
-                    }
-                }
-                stage('Terraform Apply') {
-                    steps {
-                        script {
-                            // Change to the /terraform directory
-                            dir('/terraform') {
-                                withCredentials([[
-                                    $class: 'AmazonWebServicesCredentialsBinding',
-                                    credentialsId: 'aws-credentials',
-                                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                                        echo 'terraform apply'
-                                        sh 'terraform apply --auto-approve'
+                                        echo 'terraform destroy'
+                                        sh 'terraform destroy --auto-approve'
                                 }
                             }
                         }
