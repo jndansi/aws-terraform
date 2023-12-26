@@ -1,5 +1,11 @@
-variable "name" {
-    default = "project-server1"
+variable "server1" {
+    default = "project-web-server1"
+    type = string
+    description = "The name of the aws compute instance"
+}
+
+variable "server2" {
+    default = "project-web-server2"
     type = string
     description = "The name of the aws compute instance"
 }

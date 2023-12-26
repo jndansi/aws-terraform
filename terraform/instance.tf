@@ -9,8 +9,8 @@ resource "aws_instance" "web" {
 
 
   tags = {
-    Name        = var.name
-    Environment = "production"
+    Name        = var.server1
+    Environment = "dev"
   }
 
   user_data = file("script.sh")
@@ -28,8 +28,8 @@ resource "aws_instance" "web1" {
 
 
   tags = {
-    Name        = "project-server2"
-    Environment = "production"
+    Name        = var.server2
+    Environment = "dev"
   }
 
   user_data = file("script.sh")
