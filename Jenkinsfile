@@ -16,8 +16,8 @@ pipeline {
             steps {
                 script {
                     // Change to the /terraform directory
-                    dir('/terraform') {
-                        echo 'Changed to /terraform directory'
+                    dir('terraform') {
+                        echo 'Changed to terraform directory'
                     }
                 }
             }
@@ -29,7 +29,7 @@ pipeline {
                     steps {
                         script {
                             // Change to the /terraform directory
-                            dir('/terraform') {
+                            dir('terraform') {
                                 sh 'terraform init -upgrade'
                             }
                         }
@@ -39,7 +39,7 @@ pipeline {
                     steps {
                         script {
                             // Change to the /terraform directory
-                            dir('/terraform') {
+                            dir('terraform') {
                                 withCredentials([[
                                     $class: 'AmazonWebServicesCredentialsBinding',
                                     credentialsId: 'aws-credentials',
@@ -57,7 +57,7 @@ pipeline {
                     steps {
                         script {
                             // Change to the /terraform directory
-                            dir('/terraform') {
+                            dir('terraform') {
                                 withCredentials([[
                                     $class: 'AmazonWebServicesCredentialsBinding',
                                     credentialsId: 'aws-credentials',
