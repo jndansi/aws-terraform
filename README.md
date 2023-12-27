@@ -20,22 +20,31 @@ This project leverages Terraform and Jenkins to automate the provisioning of AWS
 
 ## Getting Started
 
-Follow these steps to set up the project on your local machine:
+Follow these steps to set up the project on your local machine or on a cloud server:
 
-1. Clone the repository:
+1. **Fork and Clone the Repository:**
+   - Fork this repository and clone it locally. This allows you to customize the files according to your needs and use your repository in the pipeline.
 
-    ```bash
-    git clone https://github.com/jndansi/aws-terraform.git
-    cd aws-terraform
-    ```
+2. **Ensure Port 8080 is Open for Jenkins Server:**
+   - Jenkins runs on port 8080. Ensure that this port is open for your Jenkins server.
 
-2. Install Terraform: [Terraform Installation Guide](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+3. **Install Terraform:**
+   - Follow the [Terraform Installation Guide](https://learn.hashicorp.com/tutorials/terraform/install-cli).
 
-3. Set up AWS Credentials: Ensure AWS credentials with appropriate permissions are set up on your machine.
+4. **Install Git:**
+   - Follow the [Git Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-4. Install Jenkins: Follow Jenkins installation instructions suitable for your environment.
+5. **Install Jenkins:**
+   - Follow the Jenkins installation instructions suitable for your environment.
 
-5. Configure Jenkins Pipeline: Use the provided `Jenkinsfile` to set up a Jenkins pipeline for automating infrastructure provisioning.
+6. **Access Jenkins:**
+   - Open Jenkins using either `localhost:8080` or `<public-ip address>:8080`, depending on your Jenkins configuration.
+
+7. **Install AWS Credentials Plugin in Jenkins:**
+   - Configure your AWS credentials using your 'Access Key ID' and 'Secret Access Key' by installing the AWS Credentials Plugin in Jenkins.
+
+8. **Configure Jenkins Pipeline:**
+   - Set up a Jenkins pipeline for automating infrastructure provisioning. Choose 'Pipeline script from SCM' and point the 'Script Path' to the `Jenkinsfile` in your repository.
 
 ## Jenkins Pipeline
 
